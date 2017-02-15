@@ -143,24 +143,28 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstAttribute="trailing" secondItem="Mfa-jN-cFK" secondAttribute="trailing" id="10n-Xb-jqa"/>
                             <constraint firstItem="Mfa-jN-cFK" firstAttribute="leading" secondItem="Uvn-ys-Dls" secondAttribute="leading" id="2Ti-wH-n9s"/>
                             <constraint firstItem="Mfa-jN-cFK" firstAttribute="trailing" secondItem="Uvn-ys-Dls" secondAttribute="trailing" id="5hb-rc-3OY"/>
                             <constraint firstItem="Uvn-ys-Dls" firstAttribute="top" secondItem="hr8-r2-Z9R" secondAttribute="bottom" constant="184" id="I4D-op-HaA"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Uvn-ys-Dls" secondAttribute="trailing" constant="-16" id="K0X-hp-u1k"/>
+                            <constraint firstItem="Mfa-jN-cFK" firstAttribute="top" secondItem="zVH-WS-fMg" secondAttribute="top" id="M5F-EX-GgX"/>
                             <constraint firstItem="Uvn-ys-Dls" firstAttribute="leading" secondItem="zVH-WS-fMg" secondAttribute="leading" id="NZS-wC-6l2"/>
                             <constraint firstAttribute="trailing" secondItem="Mfa-jN-cFK" secondAttribute="trailing" id="R9u-Hg-3av"/>
+                            <constraint firstItem="Mfa-jN-cFK" firstAttribute="leading" secondItem="zVH-WS-fMg" secondAttribute="leading" id="SlZ-kl-8r4"/>
                             <constraint firstItem="czg-J4-Rza" firstAttribute="top" secondItem="hr8-r2-Z9R" secondAttribute="bottom" constant="82" id="Tlq-5W-jZ0"/>
+                            <constraint firstItem="5kg-kc-i39" firstAttribute="top" secondItem="Mfa-jN-cFK" secondAttribute="bottom" constant="363" id="ZkO-W9-WAQ"/>
                             <constraint firstItem="czg-J4-Rza" firstAttribute="leading" secondItem="Mfa-jN-cFK" secondAttribute="leading" id="bqF-5z-D4T"/>
                             <constraint firstItem="Uvn-ys-Dls" firstAttribute="bottom" secondItem="5kg-kc-i39" secondAttribute="top" id="fbv-Eq-yj6"/>
                             <constraint firstItem="Uvn-ys-Dls" firstAttribute="leading" secondItem="5kg-kc-i39" secondAttribute="leading" id="g0t-1F-WYH"/>
                             <constraint firstItem="czg-J4-Rza" firstAttribute="trailing" secondItem="Mfa-jN-cFK" secondAttribute="trailing" id="gKE-qH-304"/>
-                            <constraint firstItem="Mfa-jN-cFK" firstAttribute="top" secondItem="hr8-r2-Z9R" secondAttribute="bottom" id="jhR-In-Yjt"/>
+                            <constraint firstItem="Mfa-jN-cFK" firstAttribute="top" secondItem="hr8-r2-Z9R" secondAttribute="bottom" constant="-64" id="jhR-In-Yjt"/>
                             <constraint firstItem="czg-J4-Rza" firstAttribute="centerY" secondItem="zVH-WS-fMg" secondAttribute="centerY" id="mOS-PI-MAe"/>
-                            <constraint firstItem="Uvn-ys-Dls" firstAttribute="top" secondItem="Mfa-jN-cFK" secondAttribute="bottom" constant="1" id="ofW-cc-ogS"/>
+                            <constraint firstItem="Uvn-ys-Dls" firstAttribute="top" secondItem="Mfa-jN-cFK" secondAttribute="bottom" constant="-12" id="ofW-cc-ogS"/>
                             <constraint firstItem="Uvn-ys-Dls" firstAttribute="trailing" secondItem="5kg-kc-i39" secondAttribute="trailing" id="pgU-C8-jau"/>
                             <constraint firstItem="Mfa-jN-cFK" firstAttribute="leading" secondItem="zVH-WS-fMg" secondAttribute="leading" id="sAm-Oi-Xqt"/>
-                            <constraint firstItem="Uvn-ys-Dls" firstAttribute="top" secondItem="Mfa-jN-cFK" secondAttribute="bottom" constant="1" id="xFc-NV-xuG"/>
-                            <constraint firstItem="Mfa-jN-cFK" firstAttribute="top" secondItem="hr8-r2-Z9R" secondAttribute="bottom" id="yqk-Yj-jbO"/>
+                            <constraint firstItem="Uvn-ys-Dls" firstAttribute="top" secondItem="Mfa-jN-cFK" secondAttribute="bottom" constant="-12" id="xFc-NV-xuG"/>
+                            <constraint firstItem="Mfa-jN-cFK" firstAttribute="top" secondItem="hr8-r2-Z9R" secondAttribute="bottom" constant="-64" id="yqk-Yj-jbO"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="9UG-Rb-dap"/>
