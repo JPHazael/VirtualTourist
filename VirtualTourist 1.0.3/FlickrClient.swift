@@ -34,10 +34,10 @@ class FlickrClient: NSObject {
     func searchByLatLon(completion: @escaping (_ success: Bool) -> Void) {
         
         
-        makeMethodParameters{ (success) -> Void in
+        makeMethodParameters{ [weak self] (success) -> Void in
             if success {
                 
-                 getRandomPageNumber(methodParameters as [String : AnyObject]) { (success) -> Void in
+                 self?.getRandomPageNumber(self?.methodParameters as! [String : AnyObject]) { (success) -> Void in
                     
                             }
                         }
