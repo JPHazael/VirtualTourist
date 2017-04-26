@@ -50,7 +50,7 @@ class MapViewController: UIViewController, MKMapViewDelegate{
     }
     
     
-    func fetchPins() -> [Pin] {
+    private func fetchPins() -> [Pin] {
         let fetchRequest: NSFetchRequest<NSFetchRequestResult> = Pin.fetchRequest()
         fetchRequest.entity = NSEntityDescription.entity(forEntityName: "Pin", in: pinContext)
         
@@ -83,7 +83,7 @@ class MapViewController: UIViewController, MKMapViewDelegate{
     }
     
     
-    func readSavedMapPosition() -> [Double]? {
+    private func readSavedMapPosition() -> [Double]? {
         let defaults = UserDefaults.standard
         let array = defaults.object(forKey: "savedMKCRArray") as? [Double]
         print("map position read: \(array)")
@@ -91,7 +91,7 @@ class MapViewController: UIViewController, MKMapViewDelegate{
     }
 
     
-    func saveMapPosition(mkcr: MKCoordinateRegion) {
+    private func saveMapPosition(mkcr: MKCoordinateRegion) {
         let defaults = UserDefaults.standard
         let array = [mkcr.center.latitude, mkcr.center.longitude, mkcr.span.latitudeDelta, mkcr.span.longitudeDelta]
         print("map position saved: \(array)")
@@ -99,14 +99,14 @@ class MapViewController: UIViewController, MKMapViewDelegate{
     }
     
     
-    func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
+     func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
         print("Map view region changed, saving new position")
         let currentRegion = mapView.region
         self.saveMapPosition(mkcr: currentRegion)
     }
     
     
-    func setSpans(pin: Pin){
+    private func setSpans(pin: Pin){
         
         let latDelta:CLLocationDegrees = 50.0
         let longDelta:CLLocationDegrees = 50.0
@@ -128,7 +128,7 @@ class MapViewController: UIViewController, MKMapViewDelegate{
     }
     
     
-    func dropPin(_ gestureRecognizer: UIGestureRecognizer) {
+    internal func dropPin(_ gestureRecognizer: UIGestureRecognizer) {
         
         let tapPoint: CGPoint = gestureRecognizer.location(in: mapView)
         let touchMapCoordinate: CLLocationCoordinate2D = mapView.convert(tapPoint, toCoordinateFrom: mapView)
@@ -168,10 +168,7 @@ class MapViewController: UIViewController, MKMapViewDelegate{
             
             if mapRegion != nil{
             saveMapPosition(mkcr: mapRegion)
-            } //else{
-                //mapView(mapView, regionDidChangeAnimated: true)
-            //}
-            
+            } 
             mapView.deselectAnnotation(mapPin, animated: false)
             let controller = segue.destination as! CollectionVC
             controller.pin = mapPin

@@ -28,26 +28,20 @@ class CollectionVC: UIViewController, UICollectionViewDelegate, UICollectionView
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var toolBar: UIToolbar!
     @IBOutlet weak var toolBarButton: UIBarButtonItem!
-    
-    
-    
+
     var pinCount = 1
-    
-    
     var blockOperations: [BlockOperation] = []
     var selectedCells: [NSIndexPath] = [] {
         didSet {
             toolBarButton.title = selectedCells.isEmpty ? "Load New Collection" : "Delete Selected Photos"
         }
     }
-
-    
     let delegate = UIApplication.shared.delegate as! AppDelegate
     var pinContext: NSManagedObjectContext {
         return delegate.stack.context
     }
+
     
-// ATTRIBUTION: https://www.andrewcbancroft.com/2015/03/05/displaying-data-with-nsfetchedresultscontroller-and-swift/
     
     lazy var fetchedResultsController: NSFetchedResultsController<Photo>? = {
         let fetchRequest = NSFetchRequest<Photo>(entityName: "Photo")
@@ -83,16 +77,16 @@ class CollectionVC: UIViewController, UICollectionViewDelegate, UICollectionView
     
         
 
-            func fetchPins() -> [Pin] {
-                let fetchRequest: NSFetchRequest<NSFetchRequestResult> = Pin.fetchRequest()
-                fetchRequest.entity = NSEntityDescription.entity(forEntityName: "Pin", in: pinContext)
-                
-                do {
-                    let results = try pinContext.fetch(fetchRequest)
-                    return results as! [Pin]
-                } catch {
-                    return [Pin]()
-                }
+        func fetchPins() -> [Pin] {
+            let fetchRequest: NSFetchRequest<NSFetchRequestResult> = Pin.fetchRequest()
+            fetchRequest.entity = NSEntityDescription.entity(forEntityName: "Pin", in: pinContext)
+            
+            do {
+                let results = try pinContext.fetch(fetchRequest)
+                return results as! [Pin]
+            } catch {
+                return [Pin]()
+            }
         }
         
         let pins = fetchPins()
@@ -113,11 +107,11 @@ class CollectionVC: UIViewController, UICollectionViewDelegate, UICollectionView
         
     if fetchedResultsController?.fetchedObjects?.count == 0 {
         
-        FlickrClient.sharedInstance.searchByLatLon(){ (success) -> Void in
+        FlickrClient.sharedInstance.searchByLatLon(){ [weak self] (success) -> Void in
             if success {
                 do {
-                    try self.fetchedResultsController?.performFetch()
-                            self.collectionView.reloadData()
+                    try self?.fetchedResultsController?.performFetch()
+                            self?.collectionView.reloadData()
                 } catch {
                     print("error fetching images!")
                 }
@@ -127,18 +121,18 @@ class CollectionVC: UIViewController, UICollectionViewDelegate, UICollectionView
 }
     
     
-    func loadNewPhotos(){
+    private func loadNewPhotos(){
         for photo in (fetchedResultsController?.fetchedObjects )! {
             pinContext.delete(photo)
         }
         do{
             try delegate.stack.saveContext()
             collectionView.reloadData()
-            FlickrClient.sharedInstance.searchByLatLon(){ (success) -> Void in
+            FlickrClient.sharedInstance.searchByLatLon(){ [weak self] (success) -> Void in
                 if success {
                     do {
-                        try self.fetchedResultsController?.performFetch()
-                        self.collectionView.reloadData()
+                        try self?.fetchedResultsController?.performFetch()
+                        self?.collectionView.reloadData()
 
                     } catch {
                         print("error fetching images!")
@@ -153,14 +147,15 @@ class CollectionVC: UIViewController, UICollectionViewDelegate, UICollectionView
     
     
     
-    func readSavedMapPosition() -> [Double]? {
+    
+    private func readSavedMapPosition() -> [Double]? {
         let defaults = UserDefaults.standard
         let array = defaults.object(forKey: "savedMKCRArray") as? [Double]
         print("map position read: \(array)")
         return array
     }
     
-    func pinFinishedDownload() {        
+    private func pinFinishedDownload() {
         if let objects = self.fetchedResultsController?.fetchedObjects {
             if objects.count == 0 {
                 self.collectionView.isHidden = true
@@ -192,7 +187,6 @@ class CollectionVC: UIViewController, UICollectionViewDelegate, UICollectionView
         if selectedCells.count != 0 {
             deleteSelectedPhotos()
         } else {
-            //toolBarButton.title = "Load New Collection"
             loadNewPhotos()
             self.pinCount = self.pinCount + 1
             print(self.pinCount)
@@ -249,7 +243,6 @@ class CollectionVC: UIViewController, UICollectionViewDelegate, UICollectionView
         let selectedCell = collectionView.cellForItem(at: indexPath as IndexPath)
         selectedCell?.layer.borderWidth = 5.0
         selectedCell?.layer.borderColor = UIColor.gray.cgColor
-        //toolBarButton.title = "Delete Selcted Photo"
     }
     
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
@@ -257,13 +250,9 @@ class CollectionVC: UIViewController, UICollectionViewDelegate, UICollectionView
             selectedCells.remove(at: index)
             let deselectedCell = collectionView.cellForItem(at: indexPath as IndexPath)
             deselectedCell?.layer.borderWidth = 0.0
-            //toolBarButton.title = "Load New Collection"
         }
     }
     
-    
-    
-//ATTRIBUTION: https://gist.github.com/nazywamsiepawel/e88790a1af1935ff5791c9fe2ea19675
     
     
     func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {

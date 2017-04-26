@@ -46,7 +46,7 @@ class FlickrClient: NSObject {
 
     
     
-    func makeMethodParameters(completion: (_ success: Bool) -> Void){
+    private func makeMethodParameters(completion: (_ success: Bool) -> Void){
         
          methodParameters = [
             Constants.FlickrParameterKeys.Method: Constants.FlickrParameterValues.SearchMethod,
@@ -67,7 +67,7 @@ class FlickrClient: NSObject {
 
     
     
-    func bboxString(latitude: Double, longitude: Double) -> String {
+    private func bboxString(latitude: Double, longitude: Double) -> String {
         // ensure bbox is bounded by minimum and maximums
         let minimumLon = max(longitude - Constants.Flickr.SearchBBoxHalfWidth, Constants.Flickr.SearchLonRange.0)
         let minimumLat = max(latitude - Constants.Flickr.SearchBBoxHalfHeight, Constants.Flickr.SearchLatRange.0)
@@ -78,11 +78,11 @@ class FlickrClient: NSObject {
     
     // MARK: Flickr API
     
-    func displayError(_ error: String) {
+    private func displayError(_ error: String) {
         print(error)
     }
     
-    fileprivate func getRandomPageNumber(_ methodParameters: [String:AnyObject], completion: @escaping (_ success: Bool) -> Void) {
+    private func getRandomPageNumber(_ methodParameters: [String:AnyObject], completion: @escaping (_ success: Bool) -> Void) {
 
         sharedClient.sharedInstance.taskForGet(url: flickrURLFromParameters(methodParameters)){ (data) -> Void in
             
@@ -119,7 +119,7 @@ class FlickrClient: NSObject {
 }
         
     
-    fileprivate func displayImageFromFlickrBySearch(methodParameters: [String:AnyObject], _ pageNumber: Int){
+    private func displayImageFromFlickrBySearch(methodParameters: [String:AnyObject], _ pageNumber: Int){
         
         var newMethodParams = methodParameters
         newMethodParams["page"] = "\(pageNumber)" as AnyObject?
@@ -187,7 +187,7 @@ class FlickrClient: NSObject {
 }
     
 
-    func downloadImageForPhoto(photo: Photo, completionHandler: @escaping (_ success: Bool, _ errorString: String?) -> Void) {
+    private func downloadImageForPhoto(photo: Photo, completionHandler: @escaping (_ success: Bool, _ errorString: String?) -> Void) {
         
         let photoUrl = URL(string: photo.imageURL!)
         
@@ -214,7 +214,7 @@ class FlickrClient: NSObject {
 
     // MARK: Helper for Creating a URL from Parameters
     
-    func flickrURLFromParameters(_ parameters: [String:AnyObject]) -> URL {
+    private func flickrURLFromParameters(_ parameters: [String:AnyObject]) -> URL {
         
         var components = URLComponents()
         components.scheme = Constants.Flickr.APIScheme
