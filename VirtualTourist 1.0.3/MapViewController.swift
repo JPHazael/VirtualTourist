@@ -17,7 +17,7 @@ class MapViewController: UIViewController, MKMapViewDelegate{
     let delegate = UIApplication.shared.delegate as! AppDelegate
     var mapPin:Pin!
     var mapRegion: MKCoordinateRegion!
-    var collectionViewRegion: MKCoordinateRegion!
+    private var collectionViewRegion: MKCoordinateRegion!
     
     var pinContext: NSManagedObjectContext {
         return delegate.stack.context
@@ -86,7 +86,7 @@ class MapViewController: UIViewController, MKMapViewDelegate{
     private func readSavedMapPosition() -> [Double]? {
         let defaults = UserDefaults.standard
         let array = defaults.object(forKey: "savedMKCRArray") as? [Double]
-        print("map position read: \(array)")
+        print("map position read: \(String(describing: array))")
         return array
     }
 

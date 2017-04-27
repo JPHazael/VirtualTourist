@@ -29,15 +29,15 @@ class CollectionVC: UIViewController, UICollectionViewDelegate, UICollectionView
     @IBOutlet weak var toolBar: UIToolbar!
     @IBOutlet weak var toolBarButton: UIBarButtonItem!
 
-    var pinCount = 1
-    var blockOperations: [BlockOperation] = []
-    var selectedCells: [NSIndexPath] = [] {
+    private var pinCount = 1
+    private var blockOperations: [BlockOperation] = []
+    private var selectedCells: [NSIndexPath] = [] {
         didSet {
             toolBarButton.title = selectedCells.isEmpty ? "Load New Collection" : "Delete Selected Photos"
         }
     }
     let delegate = UIApplication.shared.delegate as! AppDelegate
-    var pinContext: NSManagedObjectContext {
+    private var pinContext: NSManagedObjectContext {
         return delegate.stack.context
     }
 
@@ -151,7 +151,7 @@ class CollectionVC: UIViewController, UICollectionViewDelegate, UICollectionView
     private func readSavedMapPosition() -> [Double]? {
         let defaults = UserDefaults.standard
         let array = defaults.object(forKey: "savedMKCRArray") as? [Double]
-        print("map position read: \(array)")
+        print("map position read: \(String(describing: array))")
         return array
     }
     
