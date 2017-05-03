@@ -9,7 +9,7 @@
 import Foundation
 
 
-class sharedClient: NSObject{
+final class sharedClient: NSObject{
     
     
     static let sharedInstance = sharedClient()

@@ -6,7 +6,6 @@
 //  Copyright © 2016 JPDaines. All rights reserved.
 //
 
-import Foundation
 import UIKit
 import MapKit
 import CoreData

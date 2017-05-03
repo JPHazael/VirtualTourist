@@ -6,11 +6,10 @@
 //  Copyright © 2016 JPDaines. All rights reserved.
 //
 
-import Foundation
 import UIKit
 import CoreData
 
-class FlickrClient: NSObject {
+final class FlickrClient: NSObject {
     
     static let sharedInstance = FlickrClient()
     let delegate = UIApplication.shared.delegate as! AppDelegate
